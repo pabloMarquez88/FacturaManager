@@ -1,2 +1,3 @@
 http://javasampleapproach.com/spring-framework/spring-security/use-spring-security-jdbc-authentication-mysql-spring-boot
 https://memorynotfound.com/spring-boot-spring-security-thymeleaf-form-login-example/
+https://en.wikibooks.org/wiki/Java_Persistence
