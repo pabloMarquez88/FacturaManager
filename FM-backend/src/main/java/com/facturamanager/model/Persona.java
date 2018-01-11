@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,24 +18,28 @@ public class Persona {
 	private String nombre;
 	private String correo;
 	private String clave;
-//	private List<Evento> eventosVotados;
-//	private List<Evento> eventosCandidato;
+	
+	@OneToMany(mappedBy = "persona1")
+	private List<Evento> eventosVotados;
+	
+	@OneToMany(mappedBy = "persona2")
+	private List<Evento> eventosCandidato;
 
-//	public List<Evento> getEventosVotados() {
-//		return eventosVotados;
-//	}
-//
-//	public void setEventosVotados(List<Evento> eventosVotados) {
-//		this.eventosVotados = eventosVotados;
-//	}
-//
-//	public List<Evento> getEventosCandidato() {
-//		return eventosCandidato;
-//	}
-//
-//	public void setEventosCandidato(List<Evento> eventosCandidato) {
-//		this.eventosCandidato = eventosCandidato;
-//	}
+	public List<Evento> getEventosVotados() {
+		return eventosVotados;
+	}
+
+	public void setEventosVotados(List<Evento> eventosVotados) {
+		this.eventosVotados = eventosVotados;
+	}
+
+	public List<Evento> getEventosCandidato() {
+		return eventosCandidato;
+	}
+
+	public void setEventosCandidato(List<Evento> eventosCandidato) {
+		this.eventosCandidato = eventosCandidato;
+	}
 
 	public Long getId() {
 		return id;
