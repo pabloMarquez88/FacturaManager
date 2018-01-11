@@ -46,6 +46,61 @@ public class FacturaManagerController {
 		return new ResponseEntity<Persona>(p, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/crearEvento", method = RequestMethod.POST)
+	public Evento crearEvento(Evento e) {
+		try {
+			e = facturaService.crearEvento(e);
+		} catch (BusinessFacturaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return e;
+	}
+
+	@RequestMapping(value = "/crearEvento", method = RequestMethod.POST)
+	public Boolean asignarPersonaEvento(@RequestBody RequestFm request) {
+		try {
+			facturaService.asignarPersonaEvento(request.getPersona(), request.getEvento(), request.getPosicion());
+		} catch (BusinessFacturaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/crearEvento", method = RequestMethod.POST)
+	public Boolean puntuar(@RequestBody RequestFm request) {
+		try {
+			facturaService.puntuar(request.getEvento(), request.getPersonaElegida(), request.getPersonaVotante());
+		} catch (BusinessFacturaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/crearEvento", method = RequestMethod.GET)
+	public List<Evento> getListadoEventos() {
+		try {
+			facturaService.getListadoEventos();
+		} catch (BusinessFacturaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/crearEvento", method = RequestMethod.GET)
+	public Evento getEventoSemana() {
+		try {
+			facturaService.getEventoSemana();
+		} catch (BusinessFacturaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@RequestMapping(value = "/altaUsuario2", method = RequestMethod.GET)
 	public ResponseEntity<Persona> altaUsuario2() {
 		System.out.println("=================================================asdas");
@@ -56,11 +111,10 @@ public class FacturaManagerController {
 		p.setId(12323L);
 		return new ResponseEntity<Persona>(p, HttpStatus.OK);
 	}
-	
-//	@RequestMapping(value={"/login"})
-//    public String login(){
-//        return "login";
-//    }
-   
+
+	// @RequestMapping(value={"/login"})
+	// public String login(){
+	// return "login";
+	// }
 
 }
