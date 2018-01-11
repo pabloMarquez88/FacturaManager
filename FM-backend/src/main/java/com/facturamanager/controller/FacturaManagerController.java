@@ -56,5 +56,11 @@ public class FacturaManagerController {
 		p.setId(12323L);
 		return new ResponseEntity<Persona>(p, HttpStatus.OK);
 	}
+	
+//	@RequestMapping(value={"/login"})
+//    public String login(){
+//        return "login";
+//    }
+   
 
 }
