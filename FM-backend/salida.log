@@ -1,6 +1,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] Building FM-backend 0.0.1-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
+[INFO] --------------------------------------------------- ---------------------
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.10:tree (default-cli) @ FM-backend ---
 [WARNING] Using Maven 2 dependency tree to get verbose output, which may be inconsistent with actual Maven 3 resolution
