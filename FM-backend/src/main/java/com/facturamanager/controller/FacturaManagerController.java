@@ -57,7 +57,7 @@ public class FacturaManagerController {
 		return e;
 	}
 
-	@RequestMapping(value = "/crearEvento", method = RequestMethod.POST)
+	@RequestMapping(value = "/asignarPersonaEvento", method = RequestMethod.POST)
 	public Boolean asignarPersonaEvento(@RequestBody RequestFm request) {
 		try {
 			facturaService.asignarPersonaEvento(request.getPersona(), request.getEvento(), request.getPosicion());
@@ -68,7 +68,7 @@ public class FacturaManagerController {
 		return null;
 	}
 
-	@RequestMapping(value = "/crearEvento", method = RequestMethod.POST)
+	@RequestMapping(value = "/puntuar", method = RequestMethod.POST)
 	public Boolean puntuar(@RequestBody RequestFm request) {
 		try {
 			facturaService.puntuar(request.getEvento(), request.getPersonaElegida(), request.getPersonaVotante());
@@ -79,7 +79,7 @@ public class FacturaManagerController {
 		return null;
 	}
 
-	@RequestMapping(value = "/crearEvento", method = RequestMethod.GET)
+	@RequestMapping(value = "/listadoEvento", method = RequestMethod.GET)
 	public List<Evento> getListadoEventos() {
 		try {
 			facturaService.getListadoEventos();
@@ -90,7 +90,7 @@ public class FacturaManagerController {
 		return null;
 	}
 
-	@RequestMapping(value = "/crearEvento", method = RequestMethod.GET)
+	@RequestMapping(value = "/eventoSemana", method = RequestMethod.GET)
 	public Evento getEventoSemana() {
 		try {
 			facturaService.getEventoSemana();
