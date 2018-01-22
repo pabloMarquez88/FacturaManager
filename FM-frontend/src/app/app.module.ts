@@ -9,6 +9,8 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { MkComponent } from './mk/mk.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 import { HomeComponent } from './home/home.component';
+import { ConsultaComponent } from './consulta/consulta.component';
+import { VotaComponent } from './vota/vota.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { HomeComponent } from './home/home.component';
     EncabezadoComponent,
     MkComponent,
     MenuLateralComponent,
-    HomeComponent
+    HomeComponent,
+    ConsultaComponent,
+    VotaComponent
   ],
   imports: [
     BrowserModule,

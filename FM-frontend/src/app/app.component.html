@@ -1,1 +1,36 @@
-<router-outlet></router-outlet>
+<app-encabezado></app-encabezado>
+
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Por que las facturas importan {{ title }}!
+  </h1>
+</div>
+
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-3">
+      <app-menu-lateral></app-menu-lateral>
+    </div>
+    <div class="col-lg-9">
+
+        <router-outlet></router-outlet>
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+  </div>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
