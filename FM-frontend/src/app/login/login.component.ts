@@ -20,4 +20,8 @@ export class LoginComponent implements OnInit {
     this.loginService.realizarLogin(this.usuario,this.password).subscribe(respuesta =>console.warn(respuesta));
   }
 
+  recuperarEvento(): void{
+    this.loginService.recuperarEvento().subscribe(respuesta =>console.warn(respuesta));
+  }
+
 }
