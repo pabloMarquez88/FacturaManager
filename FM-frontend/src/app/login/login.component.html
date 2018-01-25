@@ -1,11 +1,12 @@
-    <h2>Login</h2>
+    <h2 style="text-align:center">Login</h2>
     <div>
-      <label>usuario:
-        <input [(ngModel)]="usuario" placeholder="name"/>
+      <label for="usuario">Usuario:        
       </label>
-      <label>password:
-        <input [(ngModel)]="password" placeholder="password"/>
+      <input class="form-control" [(ngModel)]="usuario" placeholder="name" name="usuario"/>
+      <br/>
+      <label for="password">Password:       
       </label>
+      <input class="form-control" [(ngModel)]="password" placeholder="password" name="password"/>
     </div>
-    <button (click)="loginUsuario()">save</button>
-    <button (click)="recuperarEvento()">LISTADO</button>
+    <br/>
+    <button class="btn btn-default" (click)="loginUsuario()">LOGIN</button>
