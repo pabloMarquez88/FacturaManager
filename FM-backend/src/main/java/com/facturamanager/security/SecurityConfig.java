@@ -1,6 +1,7 @@
 package com.facturamanager.security;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -8,8 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -33,7 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors();
 		http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/admin").hasRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
 				.successHandler(successHandler()).failureHandler(new CustomSimpleUrlAuthenticationFailureHandler()).permitAll().and().logout().permitAll().and().csrf().disable();
-		http.exceptionHandling().accessDeniedPage("/403");
+		http.exceptionHandling().accessDeniedPage("/403").authenticationEntryPoint(delegatingAuthenticationEntryPoint());
+	}
+	
+	@Bean
+	public DelegatingAuthenticationEntryPoint delegatingAuthenticationEntryPoint() { 
+	    LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> entryPoints = new LinkedHashMap<RequestMatcher, AuthenticationEntryPoint>();
+	    entryPoints.put(new AntPathRequestMatcher("/**"), new Http403ForbiddenEntryPoint());
+	    DelegatingAuthenticationEntryPoint defaultEntryPoint = new DelegatingAuthenticationEntryPoint(entryPoints);
+	    defaultEntryPoint.setDefaultEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
+	    return defaultEntryPoint;
 	}
 
 	@Bean
