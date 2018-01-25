@@ -103,12 +103,14 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public List<Evento> getListadoEventos() throws BusinessFacturaException {
-		return this.facturaDao.getListadoEventos();
+		List<Evento> salida =this.facturaDao.getListadoEventos(); 
+		System.out.println(salida.get(0).getPuntuaciones());
+		return salida;
 	}
 
 	@Override
-	public Evento getEventoSemana() {
-		return this.getEventoSemana();
+	public Evento getEventoSemana() throws BusinessFacturaException {
+		return this.facturaDao.getEventoSemana();
 	}
 
 }

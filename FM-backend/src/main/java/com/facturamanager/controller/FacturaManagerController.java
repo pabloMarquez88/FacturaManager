@@ -91,14 +91,14 @@ public class FacturaManagerController {
 	}
 
 	@RequestMapping(value = "/eventoSemana", method = RequestMethod.GET)
-	public Evento getEventoSemana() {
+	public ResponseEntity<Evento> getEventoSemana() {
+		Evento evento = new Evento();
 		try {
-			facturaService.getEventoSemana();
+			evento = facturaService.getEventoSemana();
 		} catch (BusinessFacturaException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ResponseEntity<Evento>(evento, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/altaUsuario2", method = RequestMethod.GET)

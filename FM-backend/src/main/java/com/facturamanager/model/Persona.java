@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Persona")
+
 public class Persona {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,27 +21,53 @@ public class Persona {
 	private String nombre;
 	private String correo;
 	private String clave;
-	
+
 	@OneToMany(mappedBy = "persona1")
-	private List<Evento> eventosVotados;
-	
+	@JsonBackReference
+	private List<Evento> eventosCandidato1;
+
 	@OneToMany(mappedBy = "persona2")
-	private List<Evento> eventosCandidato;
+	@JsonBackReference
+	private List<Evento> eventosCandidato2;
 
-	public List<Evento> getEventosVotados() {
-		return eventosVotados;
+	@OneToMany(mappedBy = "personaVotante")
+	@JsonBackReference
+	private List<Puntuacion> votos;
+
+	@OneToMany(mappedBy = "personaElegida")
+	@JsonBackReference
+	private List<Puntuacion> votosRecibidos;
+
+	public List<Puntuacion> getVotos() {
+		return votos;
 	}
 
-	public void setEventosVotados(List<Evento> eventosVotados) {
-		this.eventosVotados = eventosVotados;
+	public void setVotos(List<Puntuacion> votos) {
+		this.votos = votos;
 	}
 
-	public List<Evento> getEventosCandidato() {
-		return eventosCandidato;
+	public List<Puntuacion> getVotosRecibidos() {
+		return votosRecibidos;
 	}
 
-	public void setEventosCandidato(List<Evento> eventosCandidato) {
-		this.eventosCandidato = eventosCandidato;
+	public void setVotosRecibidos(List<Puntuacion> votosRecibidos) {
+		this.votosRecibidos = votosRecibidos;
+	}
+
+	public List<Evento> getEventosCandidato1() {
+		return eventosCandidato1;
+	}
+
+	public void setEventosCandidato1(List<Evento> eventosCandidato1) {
+		this.eventosCandidato1 = eventosCandidato1;
+	}
+
+	public List<Evento> getEventosCandidato2() {
+		return eventosCandidato2;
+	}
+
+	public void setEventosCandidato2(List<Evento> eventosCandidato2) {
+		this.eventosCandidato2 = eventosCandidato2;
 	}
 
 	public Long getId() {

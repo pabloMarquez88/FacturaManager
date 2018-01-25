@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { LoginService } from '../services/login.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,9 @@ export class LoginComponent implements OnInit {
   }
 
   loginUsuario(): void{
+
     this.loginService.realizarLogin(this.usuario,this.password).subscribe(respuesta =>console.warn(respuesta));
+
   }
 
   recuperarEvento(): void{

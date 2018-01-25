@@ -1,3 +1,16 @@
 <p>
-  vota works!
-</p>
+  <h2 style="text-align:center">Elegi las mejores facturas....</h2>
+
+
+  <label for="eventoSemanal">Participantes del evento de esta semana:</label>
+
+  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" name="eventoSemanal">
+    <li *ngFor="let p of candidatos" role="presentation">{{p.nombre}}</li>
+  </ul>
+
+  <select class="form-control" name="eventoSemanal">
+    <option *ngFor="let p of candidatos">{{p.nombre}}</option>
+  </select>
+  <br/>
+  <button class="btn btn-default" type="submit">Votar</button>
+  <!--<input class="btn btn-default" type="submit" value="Submit">-->

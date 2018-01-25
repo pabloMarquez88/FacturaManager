@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Evento")
 public class Evento {
@@ -22,15 +24,17 @@ public class Evento {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona1_ID")
+	@JsonManagedReference
 	private Persona persona1;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona2_ID")
+	@JsonManagedReference
 	private Persona persona2;
 
 	private Date fechaEvento;
 
-	@OneToMany(mappedBy = "evento")
+	@OneToMany(mappedBy = "evento",fetch = FetchType.EAGER)
 	private List<Puntuacion> puntuaciones;
 
 	public Long getId() {
