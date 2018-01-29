@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router }  from '@angular/router';
+import { Persona } from '../entidades/persona';
 
 
 @Component({
@@ -22,6 +23,10 @@ export class LoginComponent implements OnInit {
 
     this.loginService.realizarLogin(this.usuario,this.password).subscribe(respuesta =>{
       console.warn(respuesta);
+      let per : Persona = new Persona();
+      per.nombre='asdasd';
+      per.id = 3;
+      this.loginService.guardarUsuario(per);
       this.router.navigateByUrl('/home');
     });
 

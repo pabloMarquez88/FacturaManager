@@ -70,6 +70,16 @@ public class FacturaDaoImpl implements FacturaDao {
 		entityManager.persist(pun);
 		return true;
 	}
+	
+	@Override
+	public Puntuacion getPuntuacion (Evento e, Persona pv){
+		List salida = entityManager.createQuery("from Puntuacion pp WHERE pp.personaVotante.id = ? AND pp.evento.id = ?").setParameter(1, pv.getId()).setParameter(2, e.getId()).getResultList();
+		if (salida != null){
+			return (Puntuacion) salida.get(0);
+		}
+		return null;
+		
+	}
 
 	@Override
 	public List<Evento> getListadoEventos() {

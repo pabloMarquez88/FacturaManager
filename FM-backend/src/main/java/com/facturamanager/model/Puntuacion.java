@@ -23,17 +23,15 @@ public class Puntuacion {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona_votante_ID")
-
 	private Persona personaVotante;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona_elegida_ID")
-
 	private Persona personaElegida;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "evento_ID")
-	@JsonBackReference
+	@JsonBackReference(value="puntuacionEvento")
 	private Evento evento;
 
 	public Persona getPersonaVotante() {

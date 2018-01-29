@@ -62,21 +62,22 @@ public class FacturaManagerController {
 		try {
 			facturaService.asignarPersonaEvento(request.getPersona(), request.getEvento(), request.getPosicion());
 		} catch (BusinessFacturaException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return null;
 	}
 
-	@RequestMapping(value = "/puntuar", method = RequestMethod.POST)
-	public Boolean puntuar(@RequestBody RequestFm request) {
+	@RequestMapping(value = "/puntuar", method = RequestMethod.POST , consumes="application/json")
+	public ResponseEntity<RequestFm> puntuar(@RequestBody RequestFm request) {
 		try {
 			facturaService.puntuar(request.getEvento(), request.getPersonaElegida(), request.getPersonaVotante());
 		} catch (BusinessFacturaException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			request.setResultado(e1.getMensaje());
+			return new ResponseEntity<RequestFm>(request, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
+		request.setResultado("Voto recibido");
+		return new ResponseEntity<RequestFm>(request, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/listadoEvento", method = RequestMethod.GET)

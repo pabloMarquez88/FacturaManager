@@ -1,16 +1,15 @@
 <p>
-  <h2 style="text-align:center">Elegi las mejores facturas....</h2>
+  <h2 *ngIf="eventoActual"  style="text-align:center">Elegi las mejores facturas.... del {{eventoActual.fechaEvento |  date: 'dd/MM/yyyy'}}</h2>
 
-
-  <label for="eventoSemanal">Participantes del evento de esta semana:</label>
-
-  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" name="eventoSemanal">
-    <li *ngFor="let p of candidatos" role="presentation">{{p.nombre}}</li>
-  </ul>
-
-  <select class="form-control" name="eventoSemanal">
-    <option *ngFor="let p of candidatos">{{p.nombre}}</option>
+  <select class="form-control" name="eventoSemanal" [(ngModel)]="personaCandidata">
+    <option *ngFor="let p of candidatos" [ngValue]="p">{{p.nombre}}</option>
   </select>
   <br/>
-  <button class="btn btn-default" type="submit">Votar</button>
+
+  <button class="btn-default" type="submit" (click)="votarPersona()" [disabled]="personaCandidata == null " >Votar</button>
   <!--<input class="btn btn-default" type="submit" value="Submit">-->
+
+
+  <h2 style = "color:red" *ngIf="resultado">{{resultado}}</h2>
+
+  

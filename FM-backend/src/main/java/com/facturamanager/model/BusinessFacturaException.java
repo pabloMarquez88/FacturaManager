@@ -10,11 +10,12 @@ public class BusinessFacturaException extends Exception {
 	private String mensaje;
 
 	public BusinessFacturaException(Exception e, String mensaje) {
-		super(e);
+		super(mensaje, e);
 		this.mensaje = mensaje;
 	}
 
 	public BusinessFacturaException(String mensaje) {
+		super(mensaje);
 		this.mensaje = mensaje;
 	}
 

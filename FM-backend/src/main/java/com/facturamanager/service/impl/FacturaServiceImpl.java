@@ -11,6 +11,7 @@ import com.facturamanager.dao.FacturaDao;
 import com.facturamanager.model.BusinessFacturaException;
 import com.facturamanager.model.Evento;
 import com.facturamanager.model.Persona;
+import com.facturamanager.model.Puntuacion;
 import com.facturamanager.service.FacturaService;
 
 @Service
@@ -67,6 +68,7 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
+	@Transactional
 	public Boolean puntuar(Evento e, Persona personaElegida, Persona personaVotante) throws BusinessFacturaException {
 		if (personaElegida.getId().equals(personaVotante.getId())) {
 			/**
@@ -91,7 +93,12 @@ public class FacturaServiceImpl implements FacturaService {
 			}
 		}
 		if (votacionHabilitada) {
-			facturaDao.puntuar(e, personaElegida, personaVotante);
+			Puntuacion actual = facturaDao.getPuntuacion(e, personaVotante);
+			if (actual == null) {
+				facturaDao.puntuar(e, personaElegida, personaVotante);
+			} else {
+				throw new BusinessFacturaException("Ya votaste");
+			}
 		} else {
 			/**
 			 * LA VOTACION NO ESTA HABILITADA POR QUE YA CADUCO
@@ -103,7 +110,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public List<Evento> getListadoEventos() throws BusinessFacturaException {
-		List<Evento> salida =this.facturaDao.getListadoEventos(); 
+		List<Evento> salida = this.facturaDao.getListadoEventos();
 		System.out.println(salida.get(0).getPuntuaciones());
 		return salida;
 	}

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -24,12 +25,10 @@ public class Evento {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona1_ID")
-	@JsonManagedReference
 	private Persona persona1;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "persona2_ID")
-	@JsonManagedReference
 	private Persona persona2;
 
 	private Date fechaEvento;

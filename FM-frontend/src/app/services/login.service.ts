@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { LoginResponse } from '../entidades/loginResponse';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Persona } from '../entidades/persona';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,6 +13,8 @@ const httpOptions = {
 
 @Injectable()
 export class LoginService {
+
+public usuario : Persona = new Persona();
 
   private urlServicioLogin: string = 'http://localhost:8080/login';
 
@@ -40,6 +43,11 @@ export class LoginService {
         headers: encabezado, withCredentials: true
       }
     );
+  }
+
+  guardarUsuario(personaL : Persona): void{
+    this.usuario.nombre = personaL.nombre;
+    this.usuario.id = personaL.id;
   }
 
 

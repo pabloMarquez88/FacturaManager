@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Evento } from '../entidades/evento';
+import { Persona } from '../entidades/persona';
+import { RequestFM } from '../entidades/requestFM';
 
 @Injectable()
 export class EventoService {
@@ -22,6 +24,18 @@ export class EventoService {
 
   getEventoSemana(): Observable<Evento> {
     return this.http.get<Evento>(this.urlServicios + "eventoSemana", { withCredentials: true });
+  }
+
+  votar(personaVotada : Persona, personaVotante : Persona, evento : Evento) : Observable<any>{
+    let body : any = {evento : evento, personaElegida:personaVotada, personaVotante: personaVotante};
+    let encabezado: any = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.urlServicios + "puntuar",
+      JSON.stringify(body),
+      {
+        headers: encabezado, withCredentials: true
+      }
+    );
   }
 
 

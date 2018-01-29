@@ -9,6 +9,7 @@ public class RequestFm {
 	private Persona personaVotante;
 	private Persona persona;
 	private String posicion;
+	private String resultado;
 
 	public Evento getEvento() {
 		return evento;
@@ -48,6 +49,14 @@ public class RequestFm {
 
 	public void setPosicion(String posicion) {
 		this.posicion = posicion;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
 	}
 
 }

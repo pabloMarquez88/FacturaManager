@@ -3,6 +3,8 @@ import { EventoService } from '../services/evento.service';
 import { Evento } from '../entidades/evento';
 import { Puntuacion } from '../entidades/puntuacion';
 import { Persona } from '../entidades/persona';
+import { Router }  from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-consulta',
@@ -13,10 +15,13 @@ export class ConsultaComponent implements OnInit {
 
   eventos : Evento[] = [];
 
-  constructor(private eventoService: EventoService) { }
+  constructor(private eventoService: EventoService, private loginService: LoginService, private router:Router) { }
   
 
   ngOnInit() {
+    if (!this.loginService.usuario.id){
+      this.router.navigateByUrl('/login');
+    }
     this.cargarEvento();
   }
 
