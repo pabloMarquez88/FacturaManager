@@ -93,6 +93,10 @@ public class FacturaServiceImpl implements FacturaService {
 			}
 		}
 		if (votacionHabilitada) {
+
+			Persona pp = facturaDao.getPersonaByNombre(personaVotante.getNombre());
+			personaVotante.setId(pp != null ? pp.getId() : null);
+
 			Puntuacion actual = facturaDao.getPuntuacion(e, personaVotante);
 			if (actual == null) {
 				facturaDao.puntuar(e, personaElegida, personaVotante);

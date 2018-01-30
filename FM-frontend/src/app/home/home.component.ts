@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit() {
-    if (!this.loginService.usuario.id){
+    if (!this.loginService.usuario.nombre){
       this.router.navigateByUrl('/login');
     }
   }

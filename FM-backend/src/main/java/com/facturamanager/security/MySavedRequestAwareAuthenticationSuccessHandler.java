@@ -1,6 +1,8 @@
 package com.facturamanager.security;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,41 +15,39 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 
+public class MySavedRequestAwareAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-public class MySavedRequestAwareAuthenticationSuccessHandler 
-extends SimpleUrlAuthenticationSuccessHandler {
+	private RequestCache requestCache = new HttpSessionRequestCache();
 
-  private RequestCache requestCache = new HttpSessionRequestCache();
+	public static Map<String, Integer> usuarios = new HashMap<>();
+	static {
+		
+	}
 
-  @Override
-  public void onAuthenticationSuccess(
-    HttpServletRequest request,
-    HttpServletResponse response, 
-    Authentication authentication) 
-    throws ServletException, IOException {
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
 
-      SavedRequest savedRequest
-        = requestCache.getRequest(request, response);
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-      response.getWriter().print("{\"sucess\":\"true\"}");
-      
-      if (savedRequest == null) {
-          clearAuthenticationAttributes(request);
-          return;
-      }
-      String targetUrlParam = getTargetUrlParameter();
-      if (isAlwaysUseDefaultTargetUrl()
-        || (targetUrlParam != null
-        && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
-          requestCache.removeRequest(request, response);
-          clearAuthenticationAttributes(request);
-          return;
-      }
+		String nombre = authentication.getName();
+		
+		response.getWriter().print("{\"usuario\":\""+nombre+"\"}");
 
-      clearAuthenticationAttributes(request);
-  }
+		if (savedRequest == null) {
+			clearAuthenticationAttributes(request);
+			return;
+		}
+		String targetUrlParam = getTargetUrlParameter();
+		if (isAlwaysUseDefaultTargetUrl() || (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
+			requestCache.removeRequest(request, response);
+			clearAuthenticationAttributes(request);
+			return;
+		}
 
-  public void setRequestCache(RequestCache requestCache) {
-      this.requestCache = requestCache;
-  }
+		clearAuthenticationAttributes(request);
+	}
+
+	public void setRequestCache(RequestCache requestCache) {
+		this.requestCache = requestCache;
+	}
 }

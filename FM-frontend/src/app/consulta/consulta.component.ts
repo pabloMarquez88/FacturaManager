@@ -19,7 +19,7 @@ export class ConsultaComponent implements OnInit {
   
 
   ngOnInit() {
-    if (!this.loginService.usuario.id){
+    if (!this.loginService.usuario.nombre){
       this.router.navigateByUrl('/login');
     }
     this.cargarEvento();
@@ -33,7 +33,7 @@ export class ConsultaComponent implements OnInit {
   totalVotos (puntuaciones:Puntuacion[], personaElegida:Persona) : number {
     let cantidadVotos : number = 0;
     for (let puntu of puntuaciones) {
-      if (puntu.personaElegida.id==personaElegida.id){
+      if (puntu.personaElegida.nombre==personaElegida.nombre){
         cantidadVotos++;
       }
     }

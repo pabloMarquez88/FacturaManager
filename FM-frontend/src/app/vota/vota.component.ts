@@ -23,7 +23,7 @@ export class VotaComponent implements OnInit {
   constructor(private eventoService: EventoService, private loginService: LoginService, private router:Router) { }
 
   ngOnInit() {
-    if (!this.loginService.usuario.id){
+    if (!this.loginService.usuario.nombre){
       this.router.navigateByUrl('/login');
     }
     this.cargarEvento();

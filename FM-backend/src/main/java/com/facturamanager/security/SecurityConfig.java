@@ -25,7 +25,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// Authentication : User --> Roles
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.inMemoryAuthentication().withUser("user11").password("secret1").roles("USER").and().withUser("admin").password("admin").roles("USER", "ADMIN");
+		auth.inMemoryAuthentication().withUser("user11").password("secret1").roles("USER").and().withUser("admin").password("admin").roles("USER", "ADMIN")
+		.and().withUser("PMarquezRuiz@bancopatagonia.com.ar").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin2").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin3").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin4").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin5").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin6").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin7").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin8").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin9").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin10").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin11").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin12").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin13").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin14").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin15").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin16").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin17").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin18").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin19").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin20").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin21").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin22").password("admin").roles("USER", "ADMIN").
+		and().withUser("admin23").password("admin").roles("USER", "ADMIN");
 	}
 
 	// Authorization : Role -> Access

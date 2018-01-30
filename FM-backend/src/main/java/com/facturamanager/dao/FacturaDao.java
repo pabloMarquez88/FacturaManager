@@ -16,4 +16,5 @@ public interface FacturaDao {
 	public Evento getEventoSemana() throws BusinessFacturaException;
 	
 	public Puntuacion getPuntuacion (Evento e, Persona pv);
+	public Persona getPersonaByNombre(String nombre);
 }

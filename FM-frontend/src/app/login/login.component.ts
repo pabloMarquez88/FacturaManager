@@ -1,6 +1,6 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { Router }  from '@angular/router';
+import { Router } from '@angular/router';
 import { Persona } from '../entidades/persona';
 
 
@@ -11,29 +11,28 @@ import { Persona } from '../entidades/persona';
 })
 export class LoginComponent implements OnInit {
 
-@Input()  usuario :string;
-@Input()  password:string;
+  @Input() usuario: string;
+  @Input() password: string;
 
-  constructor(private loginService: LoginService, private router:Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  loginUsuario(): void{
+  loginUsuario(): void {
 
-    this.loginService.realizarLogin(this.usuario,this.password).subscribe(respuesta =>{
+    this.loginService.realizarLogin(this.usuario, this.password).subscribe(respuesta => {
       console.warn(respuesta);
-      let per : Persona = new Persona();
-      per.nombre='asdasd';
-      per.id = 3;
+      let per: Persona = new Persona();
+      per.nombre = respuesta.usuario;
       this.loginService.guardarUsuario(per);
       this.router.navigateByUrl('/home');
     });
 
   }
 
-  recuperarEvento(): void{
-    this.loginService.recuperarEvento().subscribe(respuesta =>console.warn(respuesta));
+  recuperarEvento(): void {
+    this.loginService.recuperarEvento().subscribe(respuesta => console.warn(respuesta));
   }
 
 }

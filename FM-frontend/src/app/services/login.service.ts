@@ -47,7 +47,6 @@ public usuario : Persona = new Persona();
 
   guardarUsuario(personaL : Persona): void{
     this.usuario.nombre = personaL.nombre;
-    this.usuario.id = personaL.id;
   }
 
 
