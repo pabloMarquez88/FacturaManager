@@ -8,7 +8,7 @@ import { IntercomunicacionService } from '../services/intercomunicacion.service'
 })
 export class MenuLateralComponent implements OnInit {
 
-  private mostrarMenu: any = false;
+ public mostrarMenu: any = false;
 
   constructor(private intercomunicacionService: IntercomunicacionService) { }
 
