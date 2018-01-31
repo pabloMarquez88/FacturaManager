@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,33 +25,20 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	// Authentication : User --> Roles
+
+	@Autowired
+	private DataSource dataSource;
+	
+		// Authentication : User --> Roles
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.inMemoryAuthentication().withUser("user11").password("secret1").roles("USER").and().withUser("admin").password("admin").roles("USER", "ADMIN")
-		.and().withUser("PMarquezRuiz@bancopatagonia.com.ar").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin2").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin3").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin4").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin5").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin6").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin7").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin8").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin9").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin10").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin11").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin12").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin13").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin14").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin15").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin16").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin17").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin18").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin19").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin20").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin21").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin22").password("admin").roles("USER", "ADMIN").
-		and().withUser("admin23").password("admin").roles("USER", "ADMIN");
+//		auth.inMemoryAuthentication().withUser("user11").password("secret1").roles("USER").and().withUser("admin").password("admin").roles("USER", "ADMIN")
+//		.and().withUser("PMarquezRuiz@bancopatagonia.com.ar").password("admin").roles("USER", "ADMIN").
+//		and().withUser("admin2").password("admin").roles("USER", "ADMIN").
+//		and().withUser("admin23").password("admin").roles("USER", "ADMIN");
+		auth.jdbcAuthentication().dataSource(dataSource)
+		.usersByUsernameQuery("select correo as username, clave as password, enabled from persona where upper(correo)=upper(?)")
+		.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
 	}
 
 	// Authorization : Role -> Access
@@ -78,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public CorsConfigurationSource corsConfigurationSource() {
 		final CorsConfiguration configuration = new CorsConfiguration();
 		List<String> al = new ArrayList<>();
-		al.add("http://localhost:4200");
+		al.add("*");
 		configuration.setAllowedOrigins(al);
 		al = new ArrayList<>();
 		al.add("HEAD");

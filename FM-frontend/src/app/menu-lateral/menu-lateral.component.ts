@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IntercomunicacionService } from '../services/intercomunicacion.service';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuLateralComponent implements OnInit {
 
-  constructor() { }
+  private mostrarMenu: any = false;
+
+  constructor(private intercomunicacionService: IntercomunicacionService) { }
 
   ngOnInit() {
+    this.intercomunicacionService.getData().subscribe(data => { 
+      
+      console.warn(data);
+      console.warn(this.mostrarMenu);
+      this.mostrarMenu = data;
+    });
   }
 
 }

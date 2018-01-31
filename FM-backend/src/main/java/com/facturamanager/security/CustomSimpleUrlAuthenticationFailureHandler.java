@@ -19,6 +19,8 @@ public class CustomSimpleUrlAuthenticationFailureHandler extends SimpleUrlAuthen
 	private boolean allowSessionCreation = true;
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+	
+	
 	/**
 	 * Performs the redirect or forward to the {@code defaultFailureUrl} if set,
 	 * otherwise returns a 401 error code.

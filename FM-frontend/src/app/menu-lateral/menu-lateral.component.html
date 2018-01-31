@@ -1,6 +1,6 @@
 
-  <h1 class="my-4">Menu</h1>
-  <div class="list-group">
+  <h1 class="my-4" *ngIf="mostrarMenu" >Menu</h1>
+  <div class="list-group" *ngIf="mostrarMenu">
     <a href="#" class="list-group-item active" routerLink="/vota">Vota!</a>
     <a href="#" class="list-group-item active" routerLink="/consulta">Consulta!</a>
     <a href="#" class="list-group-item active" routerLink="/mk">MK!</a>

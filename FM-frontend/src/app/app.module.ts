@@ -16,6 +16,7 @@ import { VotaComponent } from './vota/vota.component';
 import { EventoService } from './services/evento.service';
 import { LoginService } from './services/login.service';
 import { LoginComponent } from './login/login.component';
+import { IntercomunicacionService } from './services/intercomunicacion.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [EventoService, LoginService],
+  providers: [EventoService, LoginService, IntercomunicacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
