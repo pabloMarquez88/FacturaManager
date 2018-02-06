@@ -11,7 +11,7 @@ import { RequestFM } from '../entidades/requestFM';
 @Injectable()
 export class EventoService {
 
-  private urlServicios: String = 'http://localhost:8080/';
+  private urlServicios: String = 'http://soft016g:8080/';
 
   constructor(private http: HttpClient) {
 

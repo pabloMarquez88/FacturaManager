@@ -16,7 +16,7 @@ export class LoginService {
 
 public usuario : Persona = new Persona();
 
-  private urlServicioLogin: string = 'http://localhost:8080/login';
+  private urlServicio: string = 'http://soft016g:8080/';
 
   constructor(private http: HttpClient) {
 
@@ -24,7 +24,7 @@ public usuario : Persona = new Persona();
 
   /** POST: add a new hero to the server */
   recuperarEvento(): Observable<any> {
-    return this.http.get('http://localhost:8080/list', { withCredentials: true });
+    return this.http.get(this.urlServicio+'list', { withCredentials: true });
   }
 
 
@@ -36,7 +36,7 @@ public usuario : Persona = new Persona();
     let body: any = new HttpParams()
       .set('username', usuario)
       .set('password', password);
-    return this.http.post(this.urlServicioLogin,
+    return this.http.post(this.urlServicio+'login',
       body.toString(),
 
       {
